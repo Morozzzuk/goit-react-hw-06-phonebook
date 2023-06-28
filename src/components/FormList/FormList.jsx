@@ -50,6 +50,7 @@ const FormList = () => {
       <Label>
         <Span>Name</Span>
         <Input
+        autoComplete='off'
           type="text"
           placeholder="Your name"
           name="name"
@@ -63,6 +64,7 @@ const FormList = () => {
       <Label>
         <Span>Number</Span>
         <Input
+        autoComplete='off'
           type="tel"
           placeholder="Your number"
           name="number"
