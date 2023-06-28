@@ -1,9 +1,35 @@
+import Notiflix from 'notiflix';
 import { useState } from 'react';
 import { Form, Label, Input, Button, Span } from './FormList.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { getVisibleContacts } from 'redux/selectors';
+import { addContact } from 'redux/contactsSlice';
 
-function FormList({ onSubmit }) {
+const FormList = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(getVisibleContacts);
+  const dispatch = useDispatch();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const normalizedName = name.toLowerCase();
+    const isAdded = contacts.find(
+      el => el.name.toLowerCase() === normalizedName
+    );
+
+    if (isAdded) {
+      alert(`${name}: is already in contacts`);
+      Notiflix.Notify.failure(`${name}: is already in contacts`);
+      return;
+    }
+
+    dispatch(addContact({ name, number }));
+    setName('');
+    setNumber('');
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -19,15 +45,8 @@ function FormList({ onSubmit }) {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    onSubmit({ name, number });
-    setName('');
-    setNumber('');
-  };
-
   return (
-    <Form onSubmit={handleSubmit} autoComplete="off">
+    <Form onSubmit={handleSubmit}>
       <Label>
         <Span>Name</Span>
         <Input
@@ -56,10 +75,9 @@ function FormList({ onSubmit }) {
       </Label>
       <Button type="submit">
         Add to contacts
-        {/* <UserAddOutlined /> */}
       </Button>
     </Form>
   );
-}
+};
 
 export default FormList;

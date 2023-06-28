@@ -26,7 +26,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 5px 10px 5px;
+  padding: 5px 10px;
 
   background: white;
   border: 1px solid black;
