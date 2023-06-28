@@ -1,15 +1,24 @@
 import { FilterForm, FilterLabel } from './Filter.styled';
-import { Input, Span } from '../FormList/FormList.styled';
+import { Input } from '../FormList/FormList.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilter } from 'redux/selectors';
+import { changeFilter } from 'redux/filterSlice';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const value = useSelector(getFilter);
+  const dispatch = useDispatch();
+
+  const handleChange = e => {
+    dispatch(changeFilter(e.target.value));
+  };
+
   return (
     <FilterForm>
       <FilterLabel>
-        <Span>Find contacts by name</Span>
         <Input
           type="name"
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           placeholder="Please enter a name to search"
         />
       </FilterLabel>
