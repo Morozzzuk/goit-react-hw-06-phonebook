@@ -19,7 +19,7 @@ export const store = configureStore({
 
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      // якщо не зробити то, буде помилка
+      //^ якщо не зробити то, буде помилка
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
