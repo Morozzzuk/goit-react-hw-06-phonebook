@@ -1,20 +1,25 @@
-import React from 'react';
-import { ListWrapper, Item, Fragment } from './ContactList.styled';
+import { ListWrap, List } from './ContactList.styled';
 import { Button } from 'components/FormList/FormList.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { getVisibleContacts } from 'redux/selectors';
+import { deleteContacts } from 'redux/contactsSlice';
 
-const ContactList = ({ contacts, onDelete }) => {
+const ContactList = () => {
+  const contacts = useSelector(getVisibleContacts);
+  const dispatch = useDispatch();
+
   return (
-    <ListWrapper>
+    <ListWrap>
       {contacts.map(({ id, name, number }) => (
-        <Item key={id}>
-          <Fragment>{name}</Fragment>
-          <Fragment>{number}</Fragment>
-          <Button type="button" onClick={() => onDelete(id)}>
-            Delete
+        <List key={id}>
+          {name + ' : ' + number}
+
+          <Button type="button" onClick={() => dispatch(deleteContacts(id))}>
+          Delete 
           </Button>
-        </Item>
+        </List>
       ))}
-    </ListWrapper>
+    </ListWrap>
   );
 };
 
