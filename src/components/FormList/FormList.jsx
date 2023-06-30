@@ -50,7 +50,7 @@ const FormList = () => {
       <Label>
         <Span>Name</Span>
         <Input
-        autoComplete='off'
+          autoComplete="off"
           type="text"
           placeholder="Your name"
           name="name"
@@ -64,7 +64,7 @@ const FormList = () => {
       <Label>
         <Span>Number</Span>
         <Input
-        autoComplete='off'
+          autoComplete="off"
           type="tel"
           placeholder="Your number"
           name="number"
@@ -75,9 +75,7 @@ const FormList = () => {
           required
         />
       </Label>
-      <Button type="submit">
-        Add to contacts
-      </Button>
+      <Button type="submit">Add to contacts</Button>
     </Form>
   );
 };
