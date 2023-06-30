@@ -21,7 +21,7 @@ const contactsSlice = createSlice({
       },
     },
     prepare: (name, number) => {
-      //^ Для додання нового контакту
+      //^ Для додавання нового контакту
       return {
         payload: {
           id: nanoid(),
