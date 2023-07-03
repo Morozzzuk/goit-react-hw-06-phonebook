@@ -8,22 +8,18 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { persistedContactReducer } from './contactsSlice';
-import { filterReducer } from './filterSlice';
+import { persisteContactReducer } from './contactsSlice';
 
 export const store = configureStore({
   reducer: {
-    contacts: persistedContactReducer,
-    filter: filterReducer,
+    contacts: persisteContactReducer,
   },
-
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      //^ якщо не зробити то, буде помилка
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
       serializableCheck: {
-        ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    });
+  },
 });
-
 export const persistor = persistStore(store);
